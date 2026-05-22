@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="grid gap-6 lg:grid-cols-2">
+    <div class="grid gap-6 lg:grid-cols-1">
         @foreach ($accounts as $account)
             <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
                 <div class="flex flex-wrap items-center justify-between gap-2">
