@@ -65,6 +65,14 @@ class WithdrawPage extends Component
             return;
         }
 
+        $this->account->refresh();
+
+        if (! $this->account->withdrawals_enabled) {
+            $this->statusMessage = 'Saques bloqueados. Aguarde o cadeado ser aberto.';
+            $this->success = false;
+            return;
+        }
+
         $this->validate();
 
         $action = $this->account->is_safe
@@ -81,6 +89,8 @@ class WithdrawPage extends Component
 
     public function render()
     {
+        $this->account->refresh();
+
         return view('livewire.withdraw-page', [
             'account' => $this->account,
         ])->layout('layouts.auth', [

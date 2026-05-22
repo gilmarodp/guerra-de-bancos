@@ -25,6 +25,8 @@ class WithdrawSafe
                 return;
             }
 
+            usleep((int) config('banking.unsafe_delay_ms', 200) * 1000);
+
             $lockedAccount->balance = $lockedAccount->balance - $amount;
             $lockedAccount->save();
 

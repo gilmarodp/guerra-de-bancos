@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="grid gap-6 lg:grid-cols-1">
+    <div class="grid gap-6 lg:grid-cols-2">
         @foreach ($accounts as $account)
             <div class="rounded-xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
                 <div class="flex flex-wrap items-center justify-between gap-2">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="text-right">
                         <div class="text-xs text-neutral-500 dark:text-neutral-400">Saldo atual</div>
-                        <div class="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+                        <div class="text-xl font-semibold {{ $account->balance >= 0 ? 'text-blue-600' : 'text-red-600' }}">
                             R$ {{ $this->formatMoney($account->balance) }}
                         </div>
                     </div>
@@ -96,6 +96,14 @@
                                 />
                                 Mostrar QR code no painel
                             </label>
+                            <label class="inline-flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-300">
+                                <input
+                                    type="checkbox"
+                                    class="rounded border-neutral-300 text-blue-600 focus:ring-blue-500 dark:border-neutral-700"
+                                    wire:model="settings.{{ $account->id }}.withdrawals_enabled"
+                                />
+                                Cadeado aberto para saques
+                            </label>
                         </div>
                         <div class="mt-3 flex flex-wrap gap-2">
                             <button
@@ -150,6 +158,13 @@
                         @empty
                             <p class="text-xs text-neutral-500 dark:text-neutral-400">Nenhum saque registrado ainda.</p>
                         @endforelse
+                        @if ($totals->isNotEmpty())
+                            <div class="flex items-center justify-between gap-2 rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs text-neutral-700 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-200">
+                                <span class="font-semibold">Total geral</span>
+                                <span class="text-neutral-500 dark:text-neutral-400">{{ $totals->sum('total_count') }} saques</span>
+                                <span class="font-semibold text-neutral-900 dark:text-neutral-100">R$ {{ $this->formatMoney((int) $totals->sum('total_amount')) }}</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
 

@@ -19,6 +19,7 @@ class BankAccount extends Model
         'name',
         'is_safe',
         'show_qr',
+        'withdrawals_enabled',
         'initial_balance',
         'balance',
         'withdrawal_amount',
@@ -27,6 +28,7 @@ class BankAccount extends Model
     protected $casts = [
         'is_safe' => 'boolean',
         'show_qr' => 'boolean',
+        'withdrawals_enabled' => 'boolean',
     ];
 
     public function withdrawals(): HasMany

@@ -57,11 +57,13 @@ class BankDashboard extends Component
         $initialBalance = $this->parseMoneyToCents($data['initial_balance'] ?? '0');
         $withdrawalAmount = $this->parseMoneyToCents($data['withdrawal_amount'] ?? '0');
         $showQr = (bool) ($data['show_qr'] ?? false);
+        $withdrawalsEnabled = (bool) ($data['withdrawals_enabled'] ?? false);
 
         $account->update([
             'initial_balance' => $initialBalance,
             'withdrawal_amount' => $withdrawalAmount,
             'show_qr' => $showQr,
+            'withdrawals_enabled' => $withdrawalsEnabled,
         ]);
 
         $this->settings[$accountId] = $this->settingsFromAccount($account->fresh());
@@ -116,6 +118,7 @@ class BankDashboard extends Component
             'initial_balance' => $this->formatMoney($account->initial_balance),
             'withdrawal_amount' => $this->formatMoney($account->withdrawal_amount),
             'show_qr' => $account->show_qr,
+            'withdrawals_enabled' => $account->withdrawals_enabled,
         ];
     }
 }

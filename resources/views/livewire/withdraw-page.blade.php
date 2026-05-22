@@ -1,4 +1,4 @@
-<div class="mx-auto w-full max-w-lg space-y-6">
+<div class="mx-auto w-full max-w-lg space-y-6" wire:poll.2s>
     <div class="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
         <div class="space-y-2">
             <h1 class="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">{{ $account->name }}</h1>
@@ -33,10 +33,13 @@
             <button
                 class="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
                 type="submit"
-                @if (! $nameLocked) disabled @endif
+                @if (! $nameLocked || ! $account->withdrawals_enabled) disabled @endif
             >
                 Sacar R$ {{ number_format($account->withdrawal_amount / 100, 2, ',', '.') }}
             </button>
+            @unless ($account->withdrawals_enabled)
+                <p class="text-xs text-red-600">Saques bloqueados. Aguarde o cadeado ser aberto.</p>
+            @endunless
         </form>
 
         @if ($statusMessage)
