@@ -74,6 +74,32 @@ Argumentos: `slug` (unsafe/safe), `workers`, `attemptsPerWorker`.
 - `database/migrations/2026_05_22_000000_create_bank_accounts_table.php`
 - `database/migrations/2026_05_22_000001_create_withdrawals_table.php`
 
+## API de acesso seguro
+
+Endpoint seguro para criar/atualizar usuario e enviar credenciais por email e WhatsApp.
+
+- Rota: `POST /api/access-credentials`
+- Headers: `X-Access-Key: <sua-chave>` (ou `Authorization: Bearer <sua-chave>`)
+- Body JSON: `name`, `email`, `whatsapp`
+
+Variaveis de ambiente necessarias:
+
+- `BANK_API_ACCESS_KEY`
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_WHATSAPP_FROM` (ex: `whatsapp:+14155550100`)
+- `TWILIO_MESSAGING_SERVICE_SID` (opcional)
+
+Exemplo de payload:
+
+```json
+{
+  "name": "Maria Doe",
+  "email": "maria@example.com",
+  "whatsapp": "+5511999999999"
+}
+```
+
 ## Deploy no Laravel Cloud
 
 - Configure as variaveis de ambiente do banco (MySQL ou PostgreSQL).
