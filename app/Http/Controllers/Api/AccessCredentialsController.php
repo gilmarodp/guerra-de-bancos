@@ -55,7 +55,7 @@ class AccessCredentialsController extends Controller
             return response()->json(['message' => 'Failed to send credentials.'], 500);
         }
 
-        return response()->json(['message' => 'Credentials sent.'], 202);
+        return back()->with('message', 'Access credentials sent successfully.');
     }
 }
 
