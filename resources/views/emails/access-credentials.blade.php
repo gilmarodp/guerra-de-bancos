@@ -26,7 +26,7 @@
 <div class="wrapper">
     <div class="container">
         <div class="header">
-            <img src="{{ asset('login/images/logo.png') }}" alt="Vendas Corporativas">
+            <img src="https://dealers.vendascorporativas.com.br/login/images/logo.png" alt="Vendas Corporativas">
         </div>
         <div class="content">
             <h2>Bem-vindo ao sistema de cotacoes</h2>
